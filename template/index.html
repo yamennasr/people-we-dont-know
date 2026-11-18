@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agrave+Pro:wght@100..700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>People We Don't Know Site</title>
+    <link rel="stylesheet" href="/static/style.css" />
+
+</head>
+
+<body>
+    <header class="start">
+        <h1 class="agrave-pro">People We Don't Know</h1>
+        <div class="header-widgets" aria-label="Current time, date, and weather">
+            <div class="header-widget">
+                <span class="header-widget-label">Local time</span>
+                <time id="current-time"></time>
+            </div>
+            <div class="header-widget">
+                <span class="header-widget-label">Today</span>
+                <time id="current-date"></time>
+            </div>
+            <div class="header-widget weather-widget">
+                <span class="header-widget-label">Weather · Mount Lebanon</span>
+                <span id="weather-status" aria-live="polite">Loading weather…</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-layout">
+            <aside class="memories-panel" aria-labelledby="memories-title">
+                <div class="memories-heading">
+                    <h2 id="memories-title">Our moments</h2>
+                    <button id="add-photos-button" class="add-photos-button" type="button">+ Add photos</button>
+                    <input id="photo-upload" type="file" accept="image/*" multiple hidden>
+                    <span id="photo-upload-status" class="photo-upload-status" aria-live="polite"></span>
+                </div>
+                <p class="memories-intro">A spot for the photos that feel like us.</p>
+                <div id="photo-collage" class="photo-collage" aria-label="Photo collage">
+                    <figure class="photo-slot photo-slot-tall">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-08-12-23-33.jpg" alt="The friend group together at a hangout">
+                    </figure>
+                    <figure class="photo-slot photo-slot-two">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-07-23-55-02.jpg" alt="A friend posing during an evening out">
+                    </figure>
+                    <figure class="photo-slot photo-slot-three">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-01-00-51-41.jpg" alt="Friends taking a selfie at a party">
+                    </figure>
+                    <figure class="photo-slot photo-slot-four">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-04-16-57-56.jpg" alt="Two friends hanging out on a couch">
+                    </figure>
+                    <figure class="photo-slot photo-slot-five">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-07-22-26-02.jpg" alt="Friends posing together indoors">
+                    </figure>
+                    <figure class="photo-slot photo-slot-six">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-08-11-43-12.jpg" alt="Friends taking a close-up selfie">
+                    </figure>
+                    <figure class="photo-slot photo-slot-seven">
+                        <img class="photo-slot-image" src="/images/PHOTO-2026-11-08-11-43-13.jpg" alt="A friend holding a framed photo during a gathering">
+                    </figure>
+                </div>
+            </aside>
+            <section class="birthday-calendar" aria-labelledby="birthdays-title">
+                <div class="calendar-heading">
+                    <div>
+                        <h2 id="birthdays-title">Birthday calendar</h2>
+                    </div>
+                    <p id="birthday-count" class="birthday-count">14 amazing friends!</p>
+                </div>
+                <p class="calendar-intro">The next birthdays in our little corner of the world</p>
+                <div class="next-birthday" aria-live="polite">
+                    <span class="next-birthday-label">Up next</span>
+                    <span id="next-birthday-name" class="next-birthday-name"></span>
+                    <span id="next-birthday-countdown" class="next-birthday-countdown"></span>
+                </div>
+                <div class="calendar-navigation">
+                    <button id="previous-month" class="month-nav" type="button" aria-label="Previous month">‹</button>
+                    <h3 id="calendar-month" class="calendar-month" aria-live="polite"></h3>
+                    <button id="next-month" class="month-nav" type="button" aria-label="Next month">›</button>
+                    <button id="this-month" class="this-month" type="button">This month</button>
+                </div>
+                <div class="calendar-grid-wrap">
+                    <table class="calendar-grid" aria-labelledby="calendar-month">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sun</th>
+                                <th scope="col">Mon</th>
+                                <th scope="col">Tue</th>
+                                <th scope="col">Wed</th>
+                                <th scope="col">Thu</th>
+                                <th scope="col">Fri</th>
+                                <th scope="col">Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-days"></tbody>
+                    </table>
+                </div>
+                <section class="month-birthdays" aria-labelledby="month-birthdays-title">
+                    <h4 id="month-birthdays-title">Birthdays this month</h4>
+                    <ul id="month-birthday-list" class="month-birthday-list" aria-live="polite"></ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <dialog id="photo-viewer" class="photo-viewer" aria-labelledby="viewer-caption">
+        <div class="photo-viewer-content">
+            <div class="viewer-toolbar">
+                <span id="viewer-position" class="viewer-position"></span>
+                <button id="close-viewer" class="viewer-button close-viewer" type="button" aria-label="Close photo viewer">×</button>
+            </div>
+            <div class="viewer-stage">
+                <button id="previous-photo" class="viewer-button photo-navigation" type="button" aria-label="Previous photo">‹</button>
+                <img id="viewer-image" class="viewer-image" alt="">
+                <button id="next-photo" class="viewer-button photo-navigation" type="button" aria-label="Next photo">›</button>
+            </div>
+            <p id="viewer-caption" class="viewer-caption" aria-live="polite"></p>
+        </div>
+    </dialog>
+
+    <script src="/static/photo-storage-config.js"></script>
+    <script src="/static/main.js"></script>
+</body>
+
+</html>
